@@ -52,7 +52,7 @@ function calculateFees(regiNum){
             }
             else{
                 bill ="£"+(garage[i].Faults*100);
-                statement = "Your car has "+garage[i].Faults+" it will therefore cost "+bill+" to fix";
+                statement = "Your car has "+garage[i].Faults+" fault(s) it will therefore cost "+bill+" to fix";
                 paragraph4.innerHTML += statement;
             }
         }
