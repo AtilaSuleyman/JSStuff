@@ -40,7 +40,6 @@ function retrieveJson(){
 					paragraph.innerHTML += requestData["members"][i].powers[j];
 					paragraph.appendChild(br);
 				}
-				
 			}
 		}
 	}
