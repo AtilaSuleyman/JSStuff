@@ -1,10 +1,11 @@
 let garage = [];
+let availableCars = [];
 
-function checkInCar(brand, model, year, regNo, faults){
+function createCar(brand, model, year, regNo, faults){
     let car = {Brand: brand, Model: model, Year: year, RegNo: regNo, Faults: faults };
-    garage.push(car);
-    console.log(garage.length);
-    garage.forEach(function(element) {
+    availableCars.push(car);
+    console.log(availableCars.length);
+    availableCars.forEach(function(element) {
         console.log(element.Brand);
         console.log(element.Model);
         console.log(element.Year);
@@ -13,8 +14,19 @@ function checkInCar(brand, model, year, regNo, faults){
     });
     let paragraph = document.getElementById("p1");
     paragraph.innerHTML = "";
-    paragraph.innerHTML += `Your ${car.Brand} ${car.Model} has been checked in!`;
+    paragraph.innerHTML += `Your ${car.Brand} ${car.Model} has been created!`;
     document.forms.submitForm.reset();
+}
+
+function checkInCar(regiNum){
+    let output = document.getElementById("p6");
+    output.innerHTML = "";
+    availableCars.forEach(function(element) {
+        if(element.RegNo === regiNum){
+            garage.push(element);
+            output.innerHTML += `${element.Brand} ${element.Model} has been successfully checked into the garage!`
+        }
+    });
 }
 
 function loadGarage(){
@@ -58,4 +70,37 @@ function calculateFees(regiNum){
         }
     }
     document.forms.billsForm.reset();
+}
+
+function executeRequest(request){
+    let commandString = request.split(" ");
+    let command = commandString[0];
+    if(command === "create"){
+        createCar(commandString[1],commandString[2],commandString[3],commandString[4],commandString[5]);
+        let paragraph6 = document.getElementById("p5");
+        paragraph6.innerHTML = "";
+        paragraph6.innerHTML += `Your ${commandString[1]} ${commandString[2]} has been created!`;
+    }
+    else if(command === "checkin"){
+        checkInCar(commandString[1]);
+        let paragraph6 = document.getElementById("p5");
+        paragraph6.innerHTML = "";
+        paragraph6.innerHTML += `Your car has been checked in!`;
+    }
+    else if(command === "checkout"){
+        removeVehicle(commandString[1]);
+        let paragraph6 = document.getElementById("p5");
+        paragraph6.innerHTML = "";
+        paragraph6.innerHTML += `Your car has been checked out!`;
+    }
+    else if(command === "allcars"){
+        let paragraph6 = document.getElementById("p5");
+        paragraph6.innerHTML = "";
+        garage.forEach(function(element) {
+            newParagraph = document.createElement("p");
+            newParagraph.innerHTML += `Brand: ${element.Brand}, Model: ${element.Model}, Year: ${element.Year}, RegNo: ${element.RegNo}`;
+            paragraph6.appendChild(newParagraph);
+        });
+    }
+    document.forms.adminRequest.reset();
 }

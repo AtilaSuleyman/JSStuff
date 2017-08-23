@@ -6,7 +6,23 @@
 		<meta content="utf-8" http-equiv="encoding">
 	</head>
 	<body>
-        <h2>Check in your car!</h2>
+        <h2>Admin Console</h2>
+        <form name="adminRequest">
+            <p>
+                <p>
+                    Commands:<br>
+                    <b>allcars:</b> prints all cars in garage<br>
+                    <b>create car model year regNum faults:</b> creates a car with the given attributes<br> 
+                    <b>checkin regNum:</b> checks in the car into the garage that matches the reg number<br>
+                    <b>checkout regNum:</b> checks out the car from the garage that has the specified reg number<br>
+                </p>
+                    Enter your instruction:<br>
+                    <input type="text" name="searchBox" id="adminBox" value="">
+            </p>
+            <p id="p5"></p>
+            <button type="button" onclick=" executeRequest(adminBox.value)">Sumbit Request</button>
+        </form>
+        <h2>Create your car!</h2>
         <form name="submitForm">
             <p>
                     Enter your car brand:<br>
@@ -29,8 +45,17 @@
                     <input type="text" name="searchBox" id="faultBox" value="">
             </p>
             <p id="p1"></p>
-            <button type="button" onclick="checkInCar(brandBox.value, modelBox.value, yearBox.value, regNoBox.value, faultBox.value)">Check in car</button>
+            <button type="button" onclick="createCar(brandBox.value, modelBox.value, yearBox.value, regNoBox.value, faultBox.value)">Create car</button>
         </form> 
+        <h2>Check in your car!</h2>
+        <form name="checkIn">
+            <p>
+                    Enter your reg number:<br>
+                    <input type="text" name="searchBox" id="checkInBox" value="">
+            </p>
+            <p id="p6"></p>
+            <button type="button" onclick=" checkInCar(checkInBox.value)">Check In</button>
+        </form>
         <h2>Check out your car!</h2>
         <form name="checkOutForm">
             <p>
@@ -47,7 +72,7 @@
                     <input type="text" name="searchBox" id="billBox" value="">
             </p>
             <p id="p4"></p>
-            <button type="button" onclick="calculateFees(billBox.value)">Get bill</button>
+            <button type="button" onclick="calculateFees(billBox.value)">Get Bill</button>
         </form>
         <h2>Look at the current cars in your garage:</h2>
         <form name="garageForm">
